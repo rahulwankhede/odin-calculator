@@ -14,6 +14,8 @@ function divide(a, b){
 	return a / b;
 }
 
+let leftOp, rightOp, operator;
+
 function operate(operator, a, b){
 	if (operator === '+') return add(a, b);
 	else if (operator === '-') return subtract(a, b);
@@ -41,10 +43,44 @@ for(let button of numbers){
 	});
 }
 
+function setLeftOp(){
+	leftOp = parseInt(input.textContent);
+}
+
+function setOperator(op){
+	operator = op;
+}
+
 const operators = document.querySelectorAll('div.operators button');
 
 for(let operator of operators){
 	operator.addEventListener('click', function(e){
+		setLeftOp();
+		setOperator(e.target.id);
 		appendOperatorToInput(operator.id);
 	});
 }
+
+function calculateResult(){
+	return eval(input.textContent);
+}
+
+const result = document.querySelector('#equals');
+//console.log(result);
+
+result.addEventListener('click', function(e){
+	const ans = calculateResult();
+	output.textContent = ans;
+	input.textContent = ans;
+})
+
+function clearAll(){
+	input.textContent = '';
+	output.textContent = '';
+}
+
+const clear = document.querySelector('#clear');
+clear.addEventListener('click', function(e){
+	clearAll();
+}
+)
