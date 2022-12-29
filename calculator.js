@@ -14,73 +14,88 @@ function divide(a, b){
 	return a / b;
 }
 
-let leftOp, rightOp, operator;
-
-function operate(operator, a, b){
-	if (operator === '+') return add(a, b);
-	else if (operator === '-') return subtract(a, b);
-	else if (operator === '*') return multiply(a, b);
-	else if (operator === '/') return divide(a, b);
+function operate(a, operator, b){
+	if (operator == '+') return add(a, b);
+	else if (operator == '-') return subtract(a, b);
+	else if (operator == '*') return multiply(a, b);
+	else if (operator == '/') return divide(a, b);
 	else return 'Undefined operator';
 }
 
-const input = document.querySelector('.input');
-const output = document.querySelector('.output');
+const display = document.querySelector('.display');
+const numberButtons = document.querySelectorAll('div.numbers button');
+const operatorButtons = document.querySelectorAll('div.xion button');
+const equalsButton = document.querySelector('#equals');
+const clearButton = document.querySelector('#clear');
 
-function appendNumberToInput(c){
-	input.textContent += c;
+let leftOperand, operator, rightOperand, ans;
+let digitAppends = false;
+let operatingGivesResult = false;
+let operatorSet = false;
+
+function setDisplayToDigit(c){
+	display.textContent = c;
 }
 
-function appendOperatorToInput(c){
-	input.textContent = ['+', '-', '*', '/'].includes(input.textContent.slice(-1)) ? input.textContent.slice(0, -1) + c : input.textContent + c;
+function setDisplayToNumber(num){
+	display.textContent = num;
 }
 
-const numbers = document.querySelectorAll('div.numbers button');
+function appendDigitToDisplay(c){
+	display.textContent += c;
+}
 
-for(let button of numbers){
-	button.addEventListener('click', function(e){
-		appendNumberToInput(button.id);
+function clearDisplay(){
+	display.textContent = '0';
+}
+
+function resetAllVariables(){
+	leftOperand = undefined;
+	operator = undefined;
+	rightOperand = undefined;
+	ans = undefined;
+	digitAppends = false;
+	operatingGivesResult = false;
+	operatorSet = false;
+}
+
+function allClear(){
+	resetAllVariables;
+	clearDisplay();
+}
+
+clearButton.addEventListener('click', allClear);
+
+for(let numberButton of numberButtons){
+	numberButton.addEventListener('click', function(e){
+		if (digitAppends){
+			appendDigitToDisplay(e.target.id);
+		}
+		else{
+			setDisplayToDigit(e.target.id);
+			digitAppends = true;
+		}
 	});
 }
 
-function setLeftOp(){
-	leftOp = parseInt(input.textContent);
+function getResult(){
+	if (operatorSet){
+		rightOperand = parseInt(display.textContent);
+		ans = operate(leftOperand, operator, rightOperand);
+		setDisplayToNumber(ans);
+		resetAllVariables();
+	}
 }
 
-function setOperator(op){
-	operator = op;
-}
+equalsButton.addEventListener('click', getResult);
 
-const operators = document.querySelectorAll('div.operators button');
-
-for(let operator of operators){
-	operator.addEventListener('click', function(e){
-		setLeftOp();
-		setOperator(e.target.id);
-		appendOperatorToInput(operator.id);
+for(let operatorButton of operatorButtons){
+	operatorButton.addEventListener('click', function(e){
+		if (!leftOperandSet){
+			leftOperand = parseInt(display.textContent);
+			leftOperandSet = true;
+			operator = e.target.id;
+		}
 	});
 }
 
-function calculateResult(){
-	return eval(input.textContent);
-}
-
-const result = document.querySelector('#equals');
-//console.log(result);
-
-result.addEventListener('click', function(e){
-	const ans = calculateResult();
-	output.textContent = ans;
-	input.textContent = ans;
-})
-
-function clearAll(){
-	input.textContent = '';
-	output.textContent = '';
-}
-
-const clear = document.querySelector('#clear');
-clear.addEventListener('click', function(e){
-	clearAll();
-}
-)
