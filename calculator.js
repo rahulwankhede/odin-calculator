@@ -60,7 +60,7 @@ function resetAllVariables(){
 }
 
 function allClear(){
-	resetAllVariables;
+	resetAllVariables();
 	clearDisplay();
 }
 
@@ -79,23 +79,37 @@ for(let numberButton of numberButtons){
 }
 
 function getResult(){
+	rightOperand = parseInt(display.textContent);
+	ans = operate(leftOperand, operator, rightOperand);
+	setDisplayToNumber(ans);
+}
+
+function onEquals(){
 	if (operatorSet){
-		rightOperand = parseInt(display.textContent);
-		ans = operate(leftOperand, operator, rightOperand);
-		setDisplayToNumber(ans);
+		getResult();
 		resetAllVariables();
 	}
 }
 
-equalsButton.addEventListener('click', getResult);
+equalsButton.addEventListener('click', onEquals);
+
+function doSomething(e){
+	if (operatingGivesResult){
+		getResult();
+		leftOperand = parseInt(display.textContent);
+		operator = e.target.id;
+		digitAppends = false;
+		operatorSet = true;
+	}
+	else if ()
+}
 
 for(let operatorButton of operatorButtons){
-	operatorButton.addEventListener('click', function(e){
-		if (!leftOperandSet){
-			leftOperand = parseInt(display.textContent);
-			leftOperandSet = true;
-			operator = e.target.id;
-		}
-	});
+	operatorButton.addEventListener('click', doSomething);
 }
+
+let leftOperand, operator, rightOperand, ans;
+let digitAppends = false;
+let operatingGivesResult = false;
+let operatorSet = false;
 
