@@ -74,6 +74,9 @@ for(let numberButton of numberButtons){
 		else{
 			setDisplayToDigit(e.target.id);
 			digitAppends = true;
+			if (operatorSet){
+				operatingGivesResult = true;
+			}
 		}
 	});
 }
@@ -107,7 +110,6 @@ function doSomething(e){
 		operator = e.target.id;
 		digitAppends = false;
 		operatorSet = true;
-		operatingGivesResult = true;
 	}
 }
 
