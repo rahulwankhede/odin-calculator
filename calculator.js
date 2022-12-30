@@ -25,8 +25,8 @@ function operate(a, operator, b){
 const display = document.querySelector('.display');
 const numberButtons = document.querySelectorAll('div.numbers button');
 const operatorButtons = document.querySelectorAll('div.xion button');
-const equalsButton = document.querySelector('#equals');
-const clearButton = document.querySelector('#clear');
+const equalsButton = document.querySelector('.equals');
+const clearButton = document.querySelector('.clear');
 
 let leftOperand, operator, rightOperand, ans;
 let digitAppends = false;
@@ -89,6 +89,7 @@ function onEquals(){
 		getResult();
 		resetAllVariables();
 	}
+	operatingGivesResult = false;
 }
 
 equalsButton.addEventListener('click', onEquals);
@@ -101,15 +102,15 @@ function doSomething(e){
 		digitAppends = false;
 		operatorSet = true;
 	}
-	else if ()
+	else {
+		leftOperand = parseInt(display.textContent);
+		operator = e.target.id;
+		digitAppends = false;
+		operatorSet = true;
+		operatingGivesResult = true;
+	}
 }
 
 for(let operatorButton of operatorButtons){
 	operatorButton.addEventListener('click', doSomething);
 }
-
-let leftOperand, operator, rightOperand, ans;
-let digitAppends = false;
-let operatingGivesResult = false;
-let operatorSet = false;
-
