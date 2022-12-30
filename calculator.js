@@ -27,6 +27,8 @@ const numberButtons = document.querySelectorAll('div.numbers button');
 const operatorButtons = document.querySelectorAll('div.xion button');
 const equalsButton = document.querySelector('.equals');
 const clearButton = document.querySelector('.clear');
+const signButton = document.querySelector('.sign');
+const percentButton = document.querySelector('.percentage');
 
 let leftOperand, operator, rightOperand, ans;
 let digitAppends = false;
@@ -65,6 +67,18 @@ function allClear(){
 }
 
 clearButton.addEventListener('click', allClear);
+
+function changeSign(){
+	display.textContent = display.textContent.slice(0, 1) == '-' ? display.textContent.slice(1) : '-' + display.textContent;
+}
+
+signButton.addEventListener('click', changeSign);
+
+function getPercent(){
+	display.textContent = parseFloat(display.textContent) / 100;
+}
+
+percentButton.addEventListener('click', getPercent);
 
 for(let numberButton of numberButtons){
 	numberButton.addEventListener('click', function(e){
