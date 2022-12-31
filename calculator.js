@@ -29,11 +29,13 @@ const equalsButton = document.querySelector('.equals');
 const clearButton = document.querySelector('.clear');
 const signButton = document.querySelector('.sign');
 const percentButton = document.querySelector('.percentage');
+const decimalButton = document.querySelector('.decimal');
 
 let leftOperand, operator, rightOperand, ans;
 let digitAppends = false;
 let operatingGivesResult = false;
 let operatorSet = false;
+let decimalPresent = false;
 
 function setDisplayToDigit(c){
 	display.textContent = c;
@@ -41,6 +43,7 @@ function setDisplayToDigit(c){
 
 function setDisplayToNumber(num){
 	display.textContent = num;
+	decimalPresent = (num.toString()).indexOf('.') >= 0;
 }
 
 function appendDigitToDisplay(c){
@@ -59,11 +62,23 @@ function resetAllVariables(){
 	digitAppends = false;
 	operatingGivesResult = false;
 	operatorSet = false;
+//	decimalPresent = false;
 }
+
+function addDecimal(){
+	if (!decimalPresent){
+		display.textContent += '.';
+	}
+	decimalPresent = true;
+	digitAppends = true;
+}
+
+decimalButton.addEventListener('click', addDecimal);
 
 function allClear(){
 	resetAllVariables();
 	clearDisplay();
+	decimalPresent = false;
 }
 
 clearButton.addEventListener('click', allClear);
@@ -76,6 +91,7 @@ signButton.addEventListener('click', changeSign);
 
 function getPercent(){
 	display.textContent = parseFloat(display.textContent) / 100;
+	decimalPresent = (num.toString()).indexOf('.') >= 0;
 }
 
 percentButton.addEventListener('click', getPercent);
@@ -96,9 +112,10 @@ for(let numberButton of numberButtons){
 }
 
 function getResult(){
-	rightOperand = parseInt(display.textContent);
+	rightOperand = parseFloat(display.textContent);
 	ans = operate(leftOperand, operator, rightOperand);
 	setDisplayToNumber(ans);
+	decimalPresent = (ans.toString()).indexOf('.') >= 0;
 }
 
 function onEquals(){
@@ -113,17 +130,20 @@ equalsButton.addEventListener('click', onEquals);
 
 function doSomething(e){
 	if (operatingGivesResult){
+		decimalPresent = false;
 		getResult();
-		leftOperand = parseInt(display.textContent);
+		leftOperand = parseFloat(display.textContent);
 		operator = e.target.id;
 		digitAppends = false;
 		operatorSet = true;
 	}
 	else {
-		leftOperand = parseInt(display.textContent);
+		decimalPresent = false;
+		leftOperand = parseFloat(display.textContent);
 		operator = e.target.id;
 		digitAppends = false;
 		operatorSet = true;
+
 	}
 }
 
