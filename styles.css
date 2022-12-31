@@ -1,0 +1,19 @@
+.calculator{
+	border: solid black 10px;
+	width: 400px;
+	height: 500px;
+}
+
+.display{
+	display:flex;
+	width: auto;
+	font-size: 50px;
+	justify-content: flex-end;
+	align-items: end;
+	height: 80px;
+	border: solid grey 5px;
+}
+
+.buttons .numbers{
+	display: grid;
+}
