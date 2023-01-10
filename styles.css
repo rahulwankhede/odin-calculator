@@ -1,3 +1,9 @@
+*{
+	font-family: sans-serif;
+	font-size: 20px;
+	font-weight: bold;
+}
+
 .calculator{
 	border: solid black 10px;
 	width: 360px;
@@ -21,8 +27,17 @@
 
 button{
 	height: 75px;
+	background-color: green;
 }
 
 #zero{
 	grid-column: span 2;
+}
+
+.operators{
+	background-color: yellow;
+}
+
+.helpers{
+	background-color: blue;
 }
