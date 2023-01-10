@@ -23,8 +23,8 @@ function operate(a, operator, b){
 }
 
 const display = document.querySelector('.display');
-const numberButtons = document.querySelectorAll('div.numbers button');
-const operatorButtons = document.querySelectorAll('div.xion button');
+const numberButtons = document.querySelectorAll('.numbers');
+const operatorButtons = document.querySelectorAll('.xion');
 const equalsButton = document.querySelector('.equals');
 const clearButton = document.querySelector('.clear');
 const signButton = document.querySelector('.sign');
@@ -98,8 +98,9 @@ signButton.addEventListener('click', changeSign);
 
 function getPercent(){
 	if (display.textContent.length < 11){
-		display.textContent = parseFloat(display.textContent) / 100;
-		decimalPresent = (num.toString()).indexOf('.') >= 0;
+		display.textContent = (parseFloat(display.textContent) / 100).toString().slice(0, 11);
+		
+		decimalPresent = (display.textContent.indexOf('.') >= 0);
 	}
 }
 
