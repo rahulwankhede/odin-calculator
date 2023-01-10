@@ -1,7 +1,7 @@
 .calculator{
 	border: solid black 10px;
-	width: 400px;
-	height: 500px;
+	width: 360px;
+	height: auto;
 }
 
 .display{
@@ -17,4 +17,12 @@
 .buttons{
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
+}
+
+button{
+	height: 75px;
+}
+
+#zero{
+	grid-column: span 2;
 }
