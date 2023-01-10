@@ -4,6 +4,11 @@
 	font-weight: bold;
 }
 
+.content{
+	display:flex;
+	justify-content: center;
+}
+
 .calculator{
 	border: solid black 10px;
 	width: 360px;
@@ -31,7 +36,7 @@ button{
 	background-color: green;
 }
 
-#zero{
+.zero{
 	grid-column: span 2;
 }
 
