@@ -18,6 +18,7 @@
 	align-items: end;
 	height: 80px;
 	border: solid grey 5px;
+	background-color: lightgrey;
 }
 
 .buttons{

@@ -1,3 +1,5 @@
+const display_length = 10;
+
 function add(a, b){
 	return a + b;
 }
@@ -43,8 +45,8 @@ function setDisplayToDigit(c){
 
 function setDisplayToNumber(num){
 	num = num.toString();
-	if (num.length > 11){
-		num = num.slice(0, 11);
+	if (num.length > display_length){
+		num = num.slice(0, display_length);
 	}
 
 	display.textContent = num;
@@ -52,7 +54,7 @@ function setDisplayToNumber(num){
 }
 
 function appendDigitToDisplay(c){
-	if(display.textContent.length < 11){
+	if(display.textContent.length < display_length){
 		display.textContent += c;
 	}
 }
@@ -97,8 +99,8 @@ function changeSign(){
 signButton.addEventListener('click', changeSign);
 
 function getPercent(){
-	if (display.textContent.length < 11){
-		display.textContent = (parseFloat(display.textContent) / 100).toString().slice(0, 11);
+	if (display.textContent.length < display_length){
+		display.textContent = (parseFloat(display.textContent) / 100).toString().slice(0, display_length);
 		
 		decimalPresent = (display.textContent.indexOf('.') >= 0);
 	}
